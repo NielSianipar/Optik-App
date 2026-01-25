@@ -35,7 +35,7 @@ Melakukan optimalisasi query MySQL untuk memastikan pengambilan data yang cepat.
 Mengelola koneksi database dan integritas data melalui backend Go.
 
 
-**2.M.Rifky - System Analyst (Peran Dan tanggung jawab 80%)**
+**2.M.Rifqi - System Analyst (Peran Dan tanggung jawab 80%)**
 
 System Analysis: Melakukan analisis kebutuhan sistem dan mendefinisikan alur bisnis toko optik (Flowchart & Use Case).
 
