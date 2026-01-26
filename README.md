@@ -97,3 +97,11 @@ Akun Demo :
 
 akses admin panel routes : /admin
 
+## 👥 Tim Pengembang
+
+| Nama | Peran | Tanggung Jawab |
+| :--- | :--- | :--- |
+| **Nama Anggota 1** | Project Leader & Backend | Arsitektur database, API Development (Golang), Integrasi Midtrans. |
+| **Nama Anggota 2** | Frontend Developer | Slicing UI, State Management (React), Integrasi API. |
+| **Nama Anggota 3** | UI/UX Designer | Design system di Figma, prototyping, User Research. |
+| **Nama Anggota 4** | Quality Assurance | Manual testing, dokumentasi API, Bug reporting. |
