@@ -76,3 +76,24 @@ npm install
 
 
 npm run dev
+
+
+Akun Demo : 
+
+- User :
+
+-username : daniel@example.com
+
+
+-password : daniel
+
+- admin 
+
+-username : daniel@gmail.com
+
+
+-password : daniel123
+
+
+akses admin panel routes : /admin
+
