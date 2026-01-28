@@ -11,6 +11,7 @@ import AboutSection from "./components/AboutSection";
 import Swal from "sweetalert2";
 import CheckoutPage from "./components/CheckoutPage";
 import CartModal from "./components/CartModal";
+import ArticleDetail from "./components/ArticleDetail";
 
 // --- DATA KONTEN KATEGORI ---
 const CATEGORY_CONTENT = {
@@ -47,6 +48,7 @@ function App() {
   const [articles, setArticles] = useState([]);
   const [viewMode, setViewMode] = useState("home"); // home, shop, articles
   const [currentCategory, setCurrentCategory] = useState(""); // State baru untuk tracking kategori aktif
+  const [selectedArticle, setSelectedArticle] = useState(null);
   const [cart, setCart] = useState(() => {
     // Ambil cart dari localStorage jika ada
     try {
@@ -466,7 +468,13 @@ function App() {
                       <p className="text-slate-500 leading-relaxed text-sm line-clamp-3">
                         {a.content}
                       </p>
-                      <button className="mt-6 text-blue-600 font-black text-xs uppercase tracking-widest hover:text-slate-900 transition-colors">
+                      <button 
+                        onClick={() => {
+                          setSelectedArticle(a);
+                          setViewMode("article-detail");
+                        }}
+                        className="mt-6 text-blue-600 font-black text-xs uppercase tracking-widest hover:text-slate-900 transition-colors"
+                      >
                         Baca Selengkapnya →
                       </button>
                     </div>
@@ -481,6 +489,12 @@ function App() {
               )}
             </div>
           </div>
+        )}
+        {viewMode === "article-detail" && (
+          <ArticleDetail
+            article={selectedArticle}
+            onBack={() => setViewMode("articles")}
+          />
         )}
       </main>
 

@@ -12,6 +12,8 @@ import {
   FiCheckCircle,
   FiSun,
   FiMoon,
+  FiMenu,
+  FiX,
 } from "react-icons/fi";
 
 import {
@@ -33,6 +35,7 @@ const AdminDashboard = ({ onLogout, user }) => {
   const [orders, setOrders] = useState([]);
   const [products, setProducts] = useState([]);
   const [stats, setStats] = useState([]);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   // ... existing useEffect ...
   useEffect(() => {
@@ -166,10 +169,22 @@ const AdminDashboard = ({ onLogout, user }) => {
     <div
       className={`${theme} flex min-h-screen font-sans selection:bg-blue-500/30`}
     >
-      <div className="flex-1 flex min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/50 to-white dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 text-slate-800 dark:text-slate-100 transition-colors duration-500">
+      <div className="flex-1 flex min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/50 to-white dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 text-slate-800 dark:text-slate-100 transition-colors duration-500 relative">
+        {/* MOBILE OVERLAY */}
+        {isSidebarOpen && (
+          <div
+            className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-40 lg:hidden"
+            onClick={() => setIsSidebarOpen(false)}
+          />
+        )}
+
         {/* SIDEBAR - FLOATING GLASS */}
-        <aside className="fixed left-4 top-4 bottom-4 w-72 bg-white/60 dark:bg-slate-800/40 backdrop-blur-xl border border-slate-200 dark:border-white/5 rounded-[2.5rem] flex flex-col z-50 shadow-2xl dark:shadow-slate-900/50 overflow-hidden transition-colors duration-500">
-          <div className="p-10 border-b border-slate-200 dark:border-white/5">
+        <aside
+          className={`fixed lg:left-4 lg:top-4 lg:bottom-4 w-72 bg-white/80 dark:bg-slate-800/90 backdrop-blur-2xl border-r lg:border border-slate-200 dark:border-white/5 lg:rounded-[2.5rem] flex flex-col z-50 shadow-2xl dark:shadow-slate-900/50 overflow-hidden transition-all duration-300
+            ${isSidebarOpen ? "inset-y-0 left-0" : "inset-y-0 -left-full lg:left-4"}
+          `}
+        >
+          <div className="p-8 lg:p-10 border-b border-slate-200 dark:border-white/5 flex justify-between items-center">
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 shadow-lg shadow-blue-500/20"></div>
               <h1 className="text-xl font-black tracking-tight text-slate-900 dark:text-white">
@@ -177,6 +192,12 @@ const AdminDashboard = ({ onLogout, user }) => {
                 <span className="text-blue-500 dark:text-blue-400">APP</span>
               </h1>
             </div>
+            <button
+              onClick={() => setIsSidebarOpen(false)}
+              className="lg:hidden text-slate-500 hover:text-red-500 transition-colors"
+            >
+              <FiX className="text-2xl" />
+            </button>
           </div>
 
           <nav className="flex-1 p-6 space-y-3 overflow-y-auto custom-scrollbar">
@@ -216,10 +237,17 @@ const AdminDashboard = ({ onLogout, user }) => {
         </aside>
 
         {/* MAIN CONTENT */}
-        <main className="flex-1 ml-80 p-8 min-h-screen">
+        <main className="flex-1 lg:ml-80 p-4 lg:p-8 min-h-screen transition-all duration-300">
           {/* HEADER */}
-          <div className="flex justify-between items-center mb-12 sticky top-4 z-40 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md p-4 rounded-[2rem] border border-slate-200 dark:border-white/5 shadow-xl transition-colors duration-500">
-            <div className="pl-4">
+          <div className="flex justify-between items-center mb-8 lg:mb-12 sticky top-4 z-30 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md p-3 lg:p-4 rounded-[2rem] border border-slate-200 dark:border-white/5 shadow-sm lg:shadow-xl transition-colors duration-500">
+            <div className="flex items-center gap-4 pl-2 lg:pl-4">
+              <button
+                onClick={() => setIsSidebarOpen(true)}
+                className="lg:hidden w-10 h-10 flex items-center justify-center rounded-full active:bg-slate-100 dark:active:bg-slate-800 text-slate-600 dark:text-slate-300"
+              >
+                <FiMenu className="text-2xl" />
+              </button>
+              <div>
               <h2 className="text-2xl font-black text-slate-800 dark:text-white tracking-tight">
                 {activeTab === "dashboard"
                   ? "Ringkasan Bisnis"
@@ -231,6 +259,7 @@ const AdminDashboard = ({ onLogout, user }) => {
                 Update terakhir: {new Date().toLocaleTimeString()}
               </p>
             </div>
+          </div>
 
             <div className="flex items-center gap-4 pr-2">
               <button
@@ -466,13 +495,13 @@ const ProductsTab = ({ products, onSave, onDelete }) => {
 
   return (
     <div className="animate-in slide-in-from-bottom-8 duration-700">
-      <div className="flex justify-end gap-4 mb-8">
+      <div className="flex flex-col md:flex-row justify-end gap-4 mb-8">
         <input
           type="text"
           placeholder="Cari produk..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="bg-white/50 dark:bg-slate-800/50 border border-slate-200 dark:border-white/10 rounded-2xl px-6 py-4 text-slate-800 dark:text-white text-sm outline-none focus:ring-2 ring-blue-500/50 w-full max-w-sm backdrop-blur-sm"
+          className="bg-white/50 dark:bg-slate-800/50 border border-slate-200 dark:border-white/10 rounded-2xl px-6 py-4 text-slate-800 dark:text-white text-sm outline-none focus:ring-2 ring-blue-500/50 w-full md:max-w-sm backdrop-blur-sm"
         />
         <button
           onClick={() => {
@@ -496,17 +525,17 @@ const ProductsTab = ({ products, onSave, onDelete }) => {
           currentProducts.map((p) => (
             <div
               key={p.id}
-              className="group bg-white/60 dark:bg-slate-800/40 backdrop-blur-md border border-slate-200 dark:border-white/5 p-4 rounded-[2rem] hover:bg-white/80 dark:hover:bg-slate-800/60 transition-all flex items-center justify-between shadow-sm hover:shadow-md"
+              className="group bg-white/60 dark:bg-slate-800/40 backdrop-blur-md border border-slate-200 dark:border-white/5 p-4 rounded-[2rem] hover:bg-white/80 dark:hover:bg-slate-800/60 transition-all flex flex-col sm:flex-row items-center sm:justify-between shadow-sm hover:shadow-md gap-4 sm:gap-0"
             >
-              <div className="flex items-center gap-6">
-                <div className="w-20 h-20 rounded-2xl overflow-hidden bg-slate-100 dark:bg-slate-700 border border-slate-200 dark:border-white/5">
+              <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 w-full sm:w-auto">
+                <div className="w-full sm:w-20 h-48 sm:h-20 rounded-2xl overflow-hidden bg-slate-100 dark:bg-slate-700 border border-slate-200 dark:border-white/5">
                   <img
                     src={p.image_url}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                     alt={p.name}
                   />
                 </div>
-                <div>
+                <div className="text-center sm:text-left">
                   <h4 className="text-lg font-bold text-slate-800 dark:text-white mb-1">
                     {p.name}
                   </h4>
@@ -516,8 +545,8 @@ const ProductsTab = ({ products, onSave, onDelete }) => {
                 </div>
               </div>
 
-              <div className="flex items-center gap-12 pr-6">
-                <div className="text-right">
+              <div className="flex items-center justify-between sm:justify-end w-full sm:w-auto gap-4 sm:gap-12 sm:pr-6">
+                <div className="text-left sm:text-right">
                   <p className="text-xs text-slate-500 dark:text-slate-400 mb-1">
                     Harga Satuan
                   </p>
