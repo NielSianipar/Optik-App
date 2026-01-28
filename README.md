@@ -67,13 +67,4 @@ Akun Demo :
 
 -password : daniel
 
-- admin 
-
--username : daniel@gmail.com
-
-
--password : daniel123
-
-
-akses admin panel routes : /admin
 
