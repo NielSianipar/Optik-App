@@ -4,6 +4,13 @@ Website ini adalah platform penjualan dan manajemen inventaris untuk Toko Optik,
 dirancang untuk memudahkan pelanggan dalam memilih produk (kacamata, lensa, kontak lensa) 
 dan membantu admin dalam mengelola transaksi serta stok barang.
 
+## 🚀 Link Demo
+
+| Bagian | URL Akses |
+| :--- | :--- |
+| **Landing Page / User** | [Live demo : https://optikapp.ronyrisvaldo.me](https://optikapp.ronyrisvaldo.me) |
+| **Admin Panel** | [Login Admin : https://optikapp.ronyrisvaldo.me/admin](https://optikapp.ronyrisvaldo.me/admin) |
+
 ## 📊 Kontribusi Tugas Dan Tanggung Jawab Tim
 
 | No | Nama | NIM | Peran Utama | Tugas Utama | Persentase Tugas tanggung jawab |
